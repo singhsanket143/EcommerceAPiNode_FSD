@@ -31,9 +31,19 @@ const getCategory = async (categoryId) => {
     return response;
 }
 
+const getCategoryByName = async (categoryName) => {
+    const response = await Category.findOne({
+        where: {
+            name: categoryName
+        }
+    });
+    return response;
+}
+
 module.exports = {
     getAllCategories,
     createCategory,
     deleteCategory,
-    getCategory
+    getCategory,
+    getCategoryByName
 }

@@ -41,11 +41,22 @@ const getCategory = async (req, res) => {
     });
 }
 
+const getCategoryByName = async (req, res) => {
+    const response = await categoryService.getCategoryByName(req.query.name);
+    return res.json({
+        message: 'Successfully fetched a category',
+        success: true,
+        code: 200,
+        data: response
+    });
+}
+
 module.exports = {
     getAllCategories,
     createCategory,
     deleteCategory,
-    getCategory
+    getCategory,
+    getCategoryByName
 }
 
 
