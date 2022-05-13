@@ -14,7 +14,16 @@ const createCategory = async (data) => {
     return newCategory;
 }
 
+const deleteCategory = async (categoryId) => {
+    await Category.destroy({
+        where: {
+            id: categoryId
+        }
+    });
+}
+
 module.exports = {
     getAllCategories,
-    createCategory
+    createCategory,
+    deleteCategory
 }
