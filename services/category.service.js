@@ -4,6 +4,17 @@ const getAllCategories = async () => {
     return categories;
 }
 
+const createCategory = async (data) => {
+    const newCategory = await Category.create({
+        name: data.name,
+        description: data.description,
+        createdAt: new Date(),
+        updatedAt: new Date()
+    });
+    return newCategory;
+}
+
 module.exports = {
-    getAllCategories
+    getAllCategories,
+    createCategory
 }

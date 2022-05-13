@@ -1,7 +1,16 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const configs = require('./config/serverconfig');
 const categoryRoutes = require('./routes/category.routes');
 const app = express();
+
+/*
+    We need to add a middleware that will help
+    express to read all query and body params
+    The below code is more or less like a configuration
+*/
+app.use(bodyParser.urlencoded({ extended: true}));
+app.use(bodyParser.json());
 
 categoryRoutes(app);
 
