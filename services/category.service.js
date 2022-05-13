@@ -22,8 +22,18 @@ const deleteCategory = async (categoryId) => {
     });
 }
 
+const getCategory = async (categoryId) => {
+    const response = await Category.findOne({
+        where: {
+            id: categoryId
+        }
+    });
+    return response;
+}
+
 module.exports = {
     getAllCategories,
     createCategory,
-    deleteCategory
+    deleteCategory,
+    getCategory
 }
