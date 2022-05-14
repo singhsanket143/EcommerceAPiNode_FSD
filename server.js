@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser'); // npm i body-parser
 const configs = require('./config/serverconfig');
 const categoryRoutes = require('./routes/category.routes');
+const productRoutes = require('./routes/product.routes');
 const app = express();
 
 const Product = require('./models/index').Product;
@@ -15,6 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
 
 categoryRoutes(app);
+productRoutes(app);
 
 app.get('/home', async function (req, res) {
     const getCategories = await Categories.findAll({ include: Product });
