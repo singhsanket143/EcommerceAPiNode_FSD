@@ -4,6 +4,8 @@ const configs = require('./config/serverconfig');
 const categoryRoutes = require('./routes/category.routes');
 const app = express();
 
+const Product = require('./models/index').Product;
+const Categories = require('./models/index').Categories;
 /*
     We need to add a middleware that will help
     express to read all query and body params
@@ -14,10 +16,21 @@ app.use(bodyParser.json());
 
 categoryRoutes(app);
 
-app.get('/home', function (req, res) {
-    res.send("welcome to home");
+app.get('/home', async function (req, res) {
+    const getproducts = await Product.findAll({ include: Categories });
+    res.json(getproducts);
 })
 
-app.listen(configs.PORT, () => {
+app.listen(configs.PORT, async () => {
     console.log('Server started on PORT', configs.PORT);
+    // const newProduct = await Product.create({
+    //     name: 'Ipad',
+    //     cost: 100000,
+    //     description: 'apple ipad',
+    //     categoryId: 1
+    // });
+    // console.log("product created successfully");
+    
+    // console.log(getproducts);
+
 });
