@@ -10,6 +10,17 @@ const getProudcts = async (req, res) => {
     })
 }
 
+const createProduct = async (req, res) => {
+    const response = await productService.createProduct(req.body);
+    return res.json({
+        message: 'Successfully created a product',
+        success: true,
+        code: 200,
+        data: response
+    })
+}
+
 module.exports = {
-    getProudcts
+    getProudcts,
+    createProduct
 }
