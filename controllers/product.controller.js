@@ -1,7 +1,7 @@
 const productService = require('../services/product.service');
 
 const getProudcts = async (req, res) => {
-    const response = await productService.getproducts();
+    const response = await productService.getproducts(req.query);
     return res.json({
         message: 'Successfully fetched all products',
         success: true,
