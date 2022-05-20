@@ -1,5 +1,6 @@
 const User = require('../models/index').User;
 const bcrypt = require("bcryptjs");
+const { response } = require('express');
 const jwt = require("jsonwebtoken");
 
 
@@ -20,6 +21,15 @@ const getUser = async (userEmail) => {
     return user;
 }
 
+const getUserById = async (userId) => {
+    const user = await User.findOne({
+        where: {
+            id: userId
+        }
+    });
+    return user;
+}
+
 const checkPassword = (userPassword, encryptedPassword) => {
     return bcrypt.compareSync(userPassword, encryptedPassword);
 }
@@ -29,9 +39,26 @@ const createToken = (user) => {
     return jwt.sign({id: user.id, email: user.email}, 'relevel', { expiresIn: 60 * 60 });
 }
 
+const verifyToken = (token) => {
+    try {
+        const response = jwt.verify(token, 'relevel');
+        return response;
+    } catch (err) {
+        console.log('Token not verified');
+        console.log(err);
+    }
+}
+
+// console.log(createToken({id: 1, email: 'admin@relevel.com'}));
+let token = 'eyJhbGciOiJIUzhaWwiOiJhZG1pbkByZWxldmVsLmNvbSIsImlhdCI6MTY1MzA1ODYyMSwiZXhwIjoxNjUzMDYyMjIxfQ.6hMZvZaWYhrkedpXPemYI0CHv3U8qHGWCgk8gU5wxz0';
+// console.log(jwt.verify(token, 'relevel'));
+// console.log(verifyToken(token));
+
 module.exports = {
     signup,
     getUser,
     checkPassword,
-    createToken
+    createToken,
+    verifyToken,
+    getUserById
 }
