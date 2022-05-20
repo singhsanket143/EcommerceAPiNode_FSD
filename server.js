@@ -8,6 +8,9 @@ const app = express();
 
 const Product = require('./models/index').Product;
 const Categories = require('./models/index').Categories;
+const User = require('./models/index').User;
+const Role = require('./models/index').Role;
+const db = require('./models/index');
 /*
     We need to add a middleware that will help
     express to read all query and body params
@@ -37,4 +40,33 @@ app.listen(configs.PORT, async () => {
     
     // console.log(getproducts);
 
+    await db.sequelize.sync({ force: true });
+    // await User.sync({ alter: true });
+    // const user = await User.create({
+    //     email: 'c@d.com',
+    //     password: '123456',
+    //   });
+    // const sellerRole = await Role.findOne({
+    //     where: {
+    //         id: 2
+    //     }
+    // });
+    // // user.addRole(adminRole, { through: { selfGranted: false } });
+    // const user = await User.findOne({
+    //     where: {
+    //         id: 3
+    //     }
+    // });
+    // user.addRole(sellerRole, {through: {selfGranted: false}});
+    // const result = await User.findAll({
+    //     include: [{model: Role}], 
+    //     raw: true,
+    //     nest: true, 
+    // });
+    //   console.log(result);
+    // const user = await User.findOne({
+    //     where: { email: 'a@b.com' },
+    //     include: Role
+    //   });
+    //   console.log(user);
 });
