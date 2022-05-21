@@ -18,6 +18,63 @@ const signup = async (data) => {
     user.addRole(customerRole);
     return user;
 }
+// PATCH /ecom/api/v1/user/:userId?addRole=true , body = {roleId: 1}
+const addRoleToUser = async (userId, roleId) => {
+    try {
+        const user = await User.findOne({
+            where: {
+                id: userId
+            }
+        });
+        const role = await Role.findOne({
+            where: {
+                id: roleId
+            }
+        });
+        user.addRole(role);
+        return user;
+    } catch (err) {
+        console.log('something went wrong');
+        console.log(err);
+    }
+}
+// PATCH /ecom/api/v1/user/:userId?addRole=false , body = {roleId: 1}
+const removeRoleFromUser = async (userId, roleId) => {
+    try {
+        const user = await User.findOne({
+            where: {
+                id: userId
+            }
+        });
+        const role = await Role.findOne({
+            where: {
+                id: roleId
+            }
+        });
+        console.log(user, role);
+        user.removeRole(role);
+        return user;
+    } catch (err) {
+        console.log('something went wrong');
+        console.log(err);
+    }
+}
+
+const getRolesForUser = async (userId) => {
+    try {
+        const user = await User.findOne({
+            where: {
+                id: userId
+            }
+        });
+        const roles = await user.getRoles();
+        console.log(roles);
+        return roles;
+    } catch (err) {
+        console.log(err);
+    } 
+    
+}
 
 const getUser = async (userEmail) => {
     const user = await User.findOne({
@@ -57,7 +114,7 @@ const verifyToken = (token) => {
 }
 
 // console.log(createToken({id: 1, email: 'admin@relevel.com'}));
-let token = 'eyJhbGciOiJIUzhaWwiOiJhZG1pbkByZWxldmVsLmNvbSIsImlhdCI6MTY1MzA1ODYyMSwiZXhwIjoxNjUzMDYyMjIxfQ.6hMZvZaWYhrkedpXPemYI0CHv3U8qHGWCgk8gU5wxz0';
+// let token = 'eyJhbGciOiJIUzhaWwiOiJhZG1pbkByZWxldmVsLmNvbSIsImlhdCI6MTY1MzA1ODYyMSwiZXhwIjoxNjUzMDYyMjIxfQ.6hMZvZaWYhrkedpXPemYI0CHv3U8qHGWCgk8gU5wxz0';
 // console.log(jwt.verify(token, 'relevel'));
 // console.log(verifyToken(token));
 
@@ -67,5 +124,8 @@ module.exports = {
     checkPassword,
     createToken,
     verifyToken,
-    getUserById
+    getUserById,
+    addRoleToUser,
+    removeRoleFromUser,
+    getRolesForUser
 }
