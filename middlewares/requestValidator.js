@@ -9,6 +9,18 @@ const validateCategoryCreationRequest = (req, res, next) => {
     next();
 }
 
+const validateProductCreationRequest = (req, res, next) => {
+    if(!req.body.name || !req.body.cost || !req.body.categoryId) {
+        return res.json({
+            code: 400,
+            success: false,
+            message: 'Arguments missing for creating product'
+        })
+    }
+    next();
+}
+
 module.exports = {
-    validateCategoryCreationRequest
+    validateCategoryCreationRequest,
+    validateProductCreationRequest
 }
