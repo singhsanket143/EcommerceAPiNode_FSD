@@ -41,7 +41,7 @@ const signin = async (req, res) => {
 const updateUser = async (req, res) => {
     let user;
     console.log(req.query);
-    if(req.query.addRole == true) {
+    if(req.query.addRole == 'true') {
         user = Auth.addRoleToUser(req.params.userId, req.body.roleId);
     } else {
         user = Auth.removeRoleFromUser(req.params.userId, req.body.roleId);
