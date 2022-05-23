@@ -1,5 +1,7 @@
 const Cart = require('../models/index').Cart;
 const Product = require('../models/index').Product;
+const CartProduct = require('../models/index').Cart_Products;
+
 const createCart = async (uid) => {
     console.log("uid", uid);
     const cart = await Cart.create({
@@ -23,7 +25,19 @@ const addProductToCart = async (data) => {
             id: data.productId
         }
     });
-    cart.addProduct(product, {through: {quantity: 1}});
+    const entry = await CartProduct.findOne({
+        where: {
+            cartId: cart.id,
+            productId: product.id
+        }
+    });
+    if(!entry) {
+        cart.addProduct(product, {through: {quantity: 1}});
+    } else {
+        let previousQuantity = entry.quantity;
+        entry.quantity = previousQuantity + 1;
+        await entry.save();
+    }
     return cart;
 }
 
