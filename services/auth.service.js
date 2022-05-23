@@ -1,7 +1,6 @@
 const User = require('../models/index').User;
 const Role = require('../models/index').Role;
 const bcrypt = require("bcryptjs");
-const { response } = require('express');
 const jwt = require("jsonwebtoken");
 
 
