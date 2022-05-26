@@ -9,6 +9,9 @@ const getAllCategories = async (req, res) => {
         code: 200,
         data: response
     });
+    // return res.status(200).json({
+    //    msh: 'dkfbjsvb'
+    //})
 }
 
 const createCategory = async (req, res) => {
