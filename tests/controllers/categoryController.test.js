@@ -19,3 +19,38 @@ test('category controller should return list of categories', async () => {
         data: response
     });
 });
+
+test('category controller should delete a category', async () => {
+    const req = mockRequest();
+    const res = mockResponse();
+    const spy = jest.spyOn(CategoryService, 'deleteCategory').mockImplementation(() => {
+        return true;
+    });
+
+    await CategoryController.deleteCategory(req, res);
+    expect(spy).toHaveBeenCalled();
+    expect(res.json).toHaveBeenCalledWith({
+        message: 'Successfully deleted a category',
+        success: true,
+        code: 200,
+    })
+})
+
+
+test('category controller should create a category', async () => {
+    const req = mockRequest();
+    const res = mockResponse();
+    const response = {id: 1, name: "new category"};
+    const spy = jest.spyOn(CategoryService, 'createCategory').mockImplementation(() => {
+        return response;
+    });
+
+    await CategoryController.createCategory(req, res);
+    expect(spy).toHaveBeenCalled();
+    expect(res.json).toHaveBeenCalledWith({
+        message: 'Successfully created a new category',
+        success: true,
+        code: 201,
+        data: response
+    })
+})

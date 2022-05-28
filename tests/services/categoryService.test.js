@@ -9,3 +9,13 @@ test('get all categories should return categories', async () => {
     await CategoryService.getAllCategories();
     expect(spy).toHaveBeenCalled();
 })
+
+test('create category should create a new category', async () => {
+    const data = {name: 'electronics'};
+    const response = {id: 1, name: 'electronics'};
+    const spy = jest.spyOn(Category, 'create').mockImplementation(() => {
+        return response;
+    })
+    await CategoryService.createCategory(data);
+    expect(spy).toHaveBeenCalled();
+})
