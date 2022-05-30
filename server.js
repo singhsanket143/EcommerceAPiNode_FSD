@@ -28,6 +28,10 @@ app.get('/home', async function (req, res) {
     res.json(getCategories);
 })
 
+app.get('/', (req, res) => {
+    res.send('new home');
+})
+
 app.listen(configs.PORT, async () => {
     console.log('Server started on PORT', configs.PORT);
     // const newProduct = await Product.create({
