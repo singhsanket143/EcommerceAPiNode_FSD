@@ -9,6 +9,7 @@ const app = express();
 
 const Product = require('./models/index').Product;
 const Categories = require('./models/index').Categories;
+const db = require('./models/index');
 
 /*
     We need to add a middleware that will help
