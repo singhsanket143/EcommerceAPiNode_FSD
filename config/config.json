@@ -16,7 +16,7 @@
   "production": {
     "username": "sql6498258",
     "password": "g3SVnyaSRv",
-    "database": "ecom_production",
+    "database": "sql6498258",
     "host": "sql6.freemysqlhosting.net",
     "dialect": "mysql"
   }
