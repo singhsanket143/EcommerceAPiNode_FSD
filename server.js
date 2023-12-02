@@ -33,7 +33,7 @@ app.get('/', (req, res) => {
     res.send('new home');
 })
 
-app.listen(configs.PORT, async () => {
+app.listen(configs.PORT, async startServer() => {
     console.log('Server started on PORT', configs.PORT);
     // const newProduct = await Product.create({
     //     name: 'Ipad',
